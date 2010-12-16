@@ -383,7 +383,11 @@ module RQRCode #:nodoc:
         ecdata[r] = Array.new( rs_poly.get_length - 1 )
         ( 0...ecdata[r].size ).each do |i|
           mod_index = i + mod_poly.get_length - ecdata[r].size
-          ecdata[r][i] = mod_index >= 0 ? mod_poly.get( mod_index ) : 0
+          if mod_poly.get( mod_index ).nil? then
+            ecdata[r][i] = 0
+          else
+            ecdata[r][i] = mod_index >= 0 ? mod_poly.get( mod_index ) : 0
+          end
         end
       end
 
